@@ -4,10 +4,11 @@ A project built with the **MERN stack (MongoDB, Express, React, Node.js)** and A
 
 ## 📦 Project Structure
 
+```
 ai-video-processing/
-├── client/          # React frontend
-├── server/          # Express backend + AI video processing
-├── shared/          # Общие утилиты/типы (если нужно)
+├── client/             # React frontend
+├── server/             # Express backend + AI video processing
+├── shared/             # Common utils/types
 ├── docker-compose.yml
 ├── .gitignore
 └── README.md
@@ -61,7 +62,7 @@ cd client
 npm start
 ```
 
-## 🧠 AI Логика
+## 🧠 AI Logic
 ................
 
 
