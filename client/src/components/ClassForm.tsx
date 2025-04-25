@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../store';
 import { addClass, updateClass } from '../store/classesSlice';
 
-import styles from "../styles/classform.module.scss";
+import styles from '../styles/classform.module.scss';
 
 interface ClassFormProps {
   classToEdit?: {
@@ -17,8 +17,12 @@ interface ClassFormProps {
 
 const ClassForm: React.FC<ClassFormProps> = ({ classToEdit }) => {
   const [name, setName] = useState(classToEdit ? classToEdit.name : '');
-  const [studentCount, setStudentCount] = useState(classToEdit ? classToEdit.studentCount : 0);
-  const [teachers, setTeachers] = useState(classToEdit ? classToEdit.teachers : [{ id: 0, name: '' }]);
+  const [studentCount, setStudentCount] = useState(
+    classToEdit ? classToEdit.studentCount : 0,
+  );
+  const [teachers, setTeachers] = useState(
+    classToEdit ? classToEdit.teachers : [{ id: 0, name: '' }],
+  );
 
   const dispatch: AppDispatch = useDispatch();
 
@@ -39,10 +43,9 @@ const ClassForm: React.FC<ClassFormProps> = ({ classToEdit }) => {
     }
   };
 
-
   return (
     <div className={styles.container}>
-        <h1 className={styles.title}>Adding a class</h1>
+      <h1 className={styles.title}>Adding a class</h1>
       <form className={styles.form} onSubmit={handleSubmit}>
         <div className={styles.item}>
           <label>Class Name:</label>
@@ -75,22 +78,31 @@ const ClassForm: React.FC<ClassFormProps> = ({ classToEdit }) => {
                   setTeachers(newTeachers);
                 }}
                 required
-                
               />
-              <button className={styles.btn__remove} type="button" onClick={() => {
-                setTeachers(teachers.filter((_, i) => i !== index));
-              }}>
+              <button
+                className={styles.btn__remove}
+                type="button"
+                onClick={() => {
+                  setTeachers(teachers.filter((_, i) => i !== index));
+                }}
+              >
                 Remove
               </button>
             </div>
           ))}
-          <button className={styles.btn__add} type="button" onClick={() => {
-            setTeachers([...teachers, { id: Math.random(), name: '' }]);
-          }}>
+          <button
+            className={styles.btn__add}
+            type="button"
+            onClick={() => {
+              setTeachers([...teachers, { id: Math.random(), name: '' }]);
+            }}
+          >
             Add Teacher
           </button>
         </div>
-        <button type="submit" className={styles.btn__save}>Save</button>
+        <button type="submit" className={styles.btn__save}>
+          Save
+        </button>
       </form>
     </div>
   );

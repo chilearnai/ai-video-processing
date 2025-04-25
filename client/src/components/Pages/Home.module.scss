@@ -1,0 +1,138 @@
+.editor {
+  font-family: 'Arial', sans-serif;
+  padding: 2rem;
+  background-color: #f9f9f9;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 1200px;
+  margin: 2rem auto;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+
+  &__title {
+    font-size: 2rem;
+    color: #222;
+    text-align: center;
+    margin-bottom: 1.5rem;
+  }
+}
+
+.upload-button {
+  display: block;
+  margin: 0 auto 1.5rem;
+  padding: 0.75rem 1.5rem;
+  background-color: #4caf50;
+  color: #fff;
+  font-size: 1rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: #45a049;
+  }
+}
+
+.video-controls {
+  text-align: center;
+  margin-top: 2rem;
+
+  &__video--hidden {
+    display: none;
+  }
+}
+
+.button {
+  padding: 0.75rem 1.25rem;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1rem;
+  margin: 0.5rem;
+  transition: background-color 0.3s ease;
+
+  &--cut {
+    background-color: #ff5733;
+
+    &:hover {
+      background-color: #c0392b;
+    }
+  }
+
+  &:hover {
+    background-color: #0056b3;
+  }
+}
+
+.frames {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-top: 2rem;
+
+  &__item {
+    max-width: 100%;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  }
+}
+
+.range-controls {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background-color: #e9ecef;
+  border-radius: 8px;
+  text-align: center;
+  width: 100%;
+
+  &__group {
+    margin-bottom: 1.5rem;
+  }
+
+  &__label {
+    font-size: 1rem;
+    color: #333;
+    margin-right: 0.5rem;
+  }
+
+  &__range {
+    width: 80%;
+    margin: 0.5rem 0;
+    height: 6px;
+    border-radius: 10px;
+    background-color: #ddd;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+
+    &:focus {
+      outline: none;
+      background-color: #007bff;
+    }
+
+    &::-webkit-slider-thumb,
+    &::-moz-range-thumb {
+      width: 16px;
+      height: 16px;
+      background: #007bff;
+      border-radius: 50%;
+      cursor: pointer;
+      border: none;
+    }
+  }
+
+  &__value {
+    font-size: 1rem;
+    color: #333;
+    display: inline-block;
+    margin-top: 0.5rem;
+  }
+}
+
+.input-file {
+  display: inline-block;
+  margin: 0.5rem 0;
+}

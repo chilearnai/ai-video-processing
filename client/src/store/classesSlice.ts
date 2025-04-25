@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axioss from '../components/axios';
 
-import { hostBack } from "../config";
+import { hostBack } from '../config';
 
 interface Class {
   id: number;
@@ -22,27 +22,42 @@ const initialState: ClassesState = {
   error: null,
 };
 
-export const fetchClasses = createAsyncThunk(`classes/fetchClasses`, async () => {
-  const response = await axioss.get(`${hostBack}/api/classes`);
-  console.log("Full response: ", response);
+export const fetchClasses = createAsyncThunk(
+  `classes/fetchClasses`,
+  async () => {
+    const response = await axioss.get(`${hostBack}/api/classes`);
+    console.log('Full response: ', response);
 
-  return response.data;
-});
+    return response.data;
+  },
+);
 
-export const addClass = createAsyncThunk('classes/addClass', async (newClass: Omit<Class, 'id'>) => {
-  const response = await axioss.post(`${hostBack}/api/classes`, newClass);
-  return response.data;
-});
+export const addClass = createAsyncThunk(
+  'classes/addClass',
+  async (newClass: Omit<Class, 'id'>) => {
+    const response = await axioss.post(`${hostBack}/api/classes`, newClass);
+    return response.data;
+  },
+);
 
-export const updateClass = createAsyncThunk('classes/updateClass', async (updatedClass: Class) => {
-  const response = await axioss.patch(`${hostBack}/api/classes/${updatedClass.id}`, updatedClass);
-  return response.data;
-});
+export const updateClass = createAsyncThunk(
+  'classes/updateClass',
+  async (updatedClass: Class) => {
+    const response = await axioss.patch(
+      `${hostBack}/api/classes/${updatedClass.id}`,
+      updatedClass,
+    );
+    return response.data;
+  },
+);
 
-export const deleteClass = createAsyncThunk('classes/deleteClass', async (id: number) => {
-  await axioss.delete(`${hostBack}/api/classes/${id}`);
-  return id;
-});
+export const deleteClass = createAsyncThunk(
+  'classes/deleteClass',
+  async (id: number) => {
+    await axioss.delete(`${hostBack}/api/classes/${id}`);
+    return id;
+  },
+);
 
 const classesSlice = createSlice({
   name: 'classes',
@@ -58,9 +73,9 @@ const classesSlice = createSlice({
         if (Array.isArray(action.payload)) {
           state.classes = action.payload;
         } else {
-          state.classes = [];  // Если API вернул что-то другое
+          state.classes = []; // Если API вернул что-то другое
         }
-     })
+      })
       .addCase(fetchClasses.rejected, (state, action) => {
         state.status = 'failed';
         state.error = action.error.message || 'Could not fetch classes';
@@ -69,13 +84,17 @@ const classesSlice = createSlice({
         state.classes.push(action.payload);
       })
       .addCase(updateClass.fulfilled, (state, action) => {
-        const index = state.classes.findIndex((cls) => cls.id === action.payload.id);
+        const index = state.classes.findIndex(
+          (cls) => cls.id === action.payload.id,
+        );
         if (index >= 0) {
           state.classes[index] = action.payload;
         }
       })
       .addCase(deleteClass.fulfilled, (state, action) => {
-        state.classes = state.classes.filter((cls) => cls.id !== action.payload);
+        state.classes = state.classes.filter(
+          (cls) => cls.id !== action.payload,
+        );
       });
   },
 });

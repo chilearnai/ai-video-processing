@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-import { hostBack } from "../config";
+import { hostBack } from '../config';
 
 interface Assignment {
   id: number;
@@ -23,10 +23,15 @@ const initialState: AssignmentsState = {
   error: null,
 };
 
-export const fetchAssignments = createAsyncThunk('assignments/fetchAssignments', async (studentId: number) => {
-  const response = await axios.get(`${hostBack}/api/students/${studentId}/assignments`);
-  return response.data;
-});
+export const fetchAssignments = createAsyncThunk(
+  'assignments/fetchAssignments',
+  async (studentId: number) => {
+    const response = await axios.get(
+      `${hostBack}/api/students/${studentId}/assignments`,
+    );
+    return response.data;
+  },
+);
 
 const assignmentsSlice = createSlice({
   name: 'assignments',

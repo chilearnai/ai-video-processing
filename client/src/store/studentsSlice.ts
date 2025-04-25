@@ -1,8 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-import { hostBack } from "../config";
-
+import { hostBack } from '../config';
 
 interface Student {
   id: number;
@@ -25,17 +24,21 @@ const initialState: StudentsState = {
   error: null,
 };
 
-export const fetchStudents = createAsyncThunk('students/fetchStudents', async (teacherId?: number) => {
-  const response = teacherId && teacherId !== null ? await axios.get(`${hostBack}/api/teachers/${teacherId}/students`) : 
-    await axios.get(`${hostBack}/api/students`);
-  return response.data;
-});
+export const fetchStudents = createAsyncThunk(
+  'students/fetchStudents',
+  async (teacherId?: number) => {
+    const response =
+      teacherId && teacherId !== null
+        ? await axios.get(`${hostBack}/api/teachers/${teacherId}/students`)
+        : await axios.get(`${hostBack}/api/students`);
+    return response.data;
+  },
+);
 
 /*export const fetchStudentsById = createAsyncThunk('students/fetchStudentsById', async (teacherId: number) => {
   const response = await axios.get(`/api/teachers/${teacherId}/students`);
   return response.data;
 });*/
-
 
 const studentsSlice = createSlice({
   name: 'students',
@@ -53,7 +56,7 @@ const studentsSlice = createSlice({
       .addCase(fetchStudents.rejected, (state, action) => {
         state.status = 'failed';
         state.error = action.error.message || 'Could not fetch students';
-      })
+      });
   },
 });
 

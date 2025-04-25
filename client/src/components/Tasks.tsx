@@ -22,7 +22,9 @@ const TaskPage: React.FC = () => {
 
   const fetchTasks = async () => {
     try {
-      const response = await axios.get('http://localhost:3000/reading-adapted-tests');
+      const response = await axios.get(
+        'http://localhost:3000/reading-adapted-tests',
+      );
       setTasks(response.data);
     } catch (error) {
       console.error('Failed to fetch tasks:', error);
@@ -34,7 +36,7 @@ const TaskPage: React.FC = () => {
       const newTask = {
         difficulty: 'hard',
         testType: 'academic',
-        part: 'partOne'
+        part: 'partOne',
       };
       await axios.post(`http://localhost:3000/${type}/create`, newTask);
       fetchTasks(); // Обновление списка задач
@@ -51,7 +53,7 @@ const TaskPage: React.FC = () => {
     setStatusFilter(status);
   };
 
-  const filteredTasks = tasks.filter(task => {
+  const filteredTasks = tasks.filter((task) => {
     if (filter !== 'All' && task.testType !== filter) return false;
     if (statusFilter !== 'All' && task.status !== statusFilter) return false;
     return true;
@@ -64,24 +66,69 @@ const TaskPage: React.FC = () => {
       {/* Фильтры */}
       <div className={styles.filters}>
         <div className={styles.chips}>
-          <span onClick={() => handleFilterChange('All')} className={filter === 'All' ? styles.activeChip : ''}>All</span>
-          <span onClick={() => handleFilterChange('reading')} className={filter === 'reading' ? styles.activeChip : ''}>Reading</span>
-          <span onClick={() => handleFilterChange('speaking')} className={filter === 'speaking' ? styles.activeChip : ''}>Speaking</span>
-          <span onClick={() => handleFilterChange('writing')} className={filter === 'writing' ? styles.activeChip : ''}>Writing</span>
-          <span onClick={() => handleFilterChange('listening')} className={filter === 'listening' ? styles.activeChip : ''}>Listening</span>
+          <span
+            onClick={() => handleFilterChange('All')}
+            className={filter === 'All' ? styles.activeChip : ''}
+          >
+            All
+          </span>
+          <span
+            onClick={() => handleFilterChange('reading')}
+            className={filter === 'reading' ? styles.activeChip : ''}
+          >
+            Reading
+          </span>
+          <span
+            onClick={() => handleFilterChange('speaking')}
+            className={filter === 'speaking' ? styles.activeChip : ''}
+          >
+            Speaking
+          </span>
+          <span
+            onClick={() => handleFilterChange('writing')}
+            className={filter === 'writing' ? styles.activeChip : ''}
+          >
+            Writing
+          </span>
+          <span
+            onClick={() => handleFilterChange('listening')}
+            className={filter === 'listening' ? styles.activeChip : ''}
+          >
+            Listening
+          </span>
         </div>
 
         <div className={styles.statusChips}>
-          <span onClick={() => handleStatusFilterChange('All')} className={statusFilter === 'All' ? styles.activeChip : ''}>All</span>
-          <span onClick={() => handleStatusFilterChange('Paid')} className={statusFilter === 'Paid' ? styles.activeChip : ''}>Paid</span>
-          <span onClick={() => handleStatusFilterChange('Due')} className={statusFilter === 'Due' ? styles.activeChip : ''}>Due</span>
-          <span onClick={() => handleStatusFilterChange('Not Paid')} className={statusFilter === 'Not Paid' ? styles.activeChip : ''}>Not Paid</span>
+          <span
+            onClick={() => handleStatusFilterChange('All')}
+            className={statusFilter === 'All' ? styles.activeChip : ''}
+          >
+            All
+          </span>
+          <span
+            onClick={() => handleStatusFilterChange('Paid')}
+            className={statusFilter === 'Paid' ? styles.activeChip : ''}
+          >
+            Paid
+          </span>
+          <span
+            onClick={() => handleStatusFilterChange('Due')}
+            className={statusFilter === 'Due' ? styles.activeChip : ''}
+          >
+            Due
+          </span>
+          <span
+            onClick={() => handleStatusFilterChange('Not Paid')}
+            className={statusFilter === 'Not Paid' ? styles.activeChip : ''}
+          >
+            Not Paid
+          </span>
         </div>
       </div>
 
       {/* Список задач */}
       <div className={styles.taskList}>
-        {filteredTasks.map(task => (
+        {filteredTasks.map((task) => (
           <div className={styles.taskItem} key={task.id}>
             <div className={styles.taskInfo}>
               <span className={styles.taskDate}>21/10/2024</span>
@@ -89,9 +136,15 @@ const TaskPage: React.FC = () => {
               <span className={styles.taskType}>{task.testType}</span>
               <span className={styles.taskPart}>{task.part}</span>
               <span className={styles.taskStatus}>
-                {task.status === 'Paid' && <span className={styles.statusPaid}>Paid</span>}
-                {task.status === 'Due' && <span className={styles.statusDue}>Due</span>}
-                {task.status === 'Not Paid' && <span className={styles.statusNotPaid}>Not Paid</span>}
+                {task.status === 'Paid' && (
+                  <span className={styles.statusPaid}>Paid</span>
+                )}
+                {task.status === 'Due' && (
+                  <span className={styles.statusDue}>Due</span>
+                )}
+                {task.status === 'Not Paid' && (
+                  <span className={styles.statusNotPaid}>Not Paid</span>
+                )}
               </span>
             </div>
             <div className={styles.taskActions}>
@@ -106,10 +159,18 @@ const TaskPage: React.FC = () => {
       <div className={styles.createTask}>
         <h2>Create New Task</h2>
         <div className={styles.createButtons}>
-          <button onClick={() => createTask('reading')}>Add Reading Task</button>
-          <button onClick={() => createTask('speaking')}>Add Speaking Task</button>
-          <button onClick={() => createTask('writing')}>Add Writing Task</button>
-          <button onClick={() => createTask('listening')}>Add Listening Task</button>
+          <button onClick={() => createTask('reading')}>
+            Add Reading Task
+          </button>
+          <button onClick={() => createTask('speaking')}>
+            Add Speaking Task
+          </button>
+          <button onClick={() => createTask('writing')}>
+            Add Writing Task
+          </button>
+          <button onClick={() => createTask('listening')}>
+            Add Listening Task
+          </button>
         </div>
       </div>
     </div>

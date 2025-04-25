@@ -25,6 +25,6 @@ const Sidebar: React.FC = () => {
       </ul>
     </div>
   );
-}
+};
 
 export default Sidebar;

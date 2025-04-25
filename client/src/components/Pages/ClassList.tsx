@@ -6,7 +6,7 @@ import { RootState } from '../../store';
 import { fetchClasses, deleteClass } from '../../store/classesSlice';
 import { AppDispatch } from '../../store';
 
-import styles from "../../styles/classlist.module.scss";
+import styles from '../../styles/classlist.module.scss';
 
 export interface ClassObject {
   id: number;
@@ -19,7 +19,7 @@ interface ClassListProps {
   onObject: (newObject: ClassObject) => void;
 }
 
-const ClassList: React.FC<ClassListProps> = ({onObject}) => {
+const ClassList: React.FC<ClassListProps> = ({ onObject }) => {
   const dispatch: AppDispatch = useDispatch();
   const classes = useSelector((state: RootState) => state.classes.classes);
   const classStatus = useSelector((state: RootState) => state.classes.status);
@@ -67,12 +67,31 @@ const ClassList: React.FC<ClassListProps> = ({onObject}) => {
               <td>{cls.teachers.map((teacher) => teacher.name).join(', ')}</td>
               <td>
                 <Link to="">
-                  <button className={`${styles.classlist__btn} ${styles.classlist__view}`} onClick={() => {return}}>View</button>
+                  <button
+                    className={`${styles.classlist__btn} ${styles.classlist__view}`}
+                    onClick={() => {
+                      return;
+                    }}
+                  >
+                    View
+                  </button>
                 </Link>
-                <Link to={"/edit/form"}>
-                  <button className={`${styles.classlist__btn} ${styles.classlist__edit}`} onClick={() => {onObject(cls)}}>Edit</button>
+                <Link to={'/edit/form'}>
+                  <button
+                    className={`${styles.classlist__btn} ${styles.classlist__edit}`}
+                    onClick={() => {
+                      onObject(cls);
+                    }}
+                  >
+                    Edit
+                  </button>
                 </Link>
-                <button className={`${styles.classlist__btn} ${styles.classlist__delete}`} onClick={() => handleDelete(cls.id)}>Delete</button>
+                <button
+                  className={`${styles.classlist__btn} ${styles.classlist__delete}`}
+                  onClick={() => handleDelete(cls.id)}
+                >
+                  Delete
+                </button>
               </td>
             </tr>
           ))}
@@ -88,8 +107,16 @@ const ClassList: React.FC<ClassListProps> = ({onObject}) => {
       <div className={styles.container}>
         <h1 className={styles.title}>Classes</h1>
         {content}
-        <Link to="/class/form"><button className={`${styles.classlist__btn} ${styles.addForm}`}>Add class +</button></Link>
-        <Link to="/classes/students"><button className={`${styles.classlist__btn} ${styles.allStudents}`}>All students</button></Link>
+        <Link to="/class/form">
+          <button className={`${styles.classlist__btn} ${styles.addForm}`}>
+            Add class +
+          </button>
+        </Link>
+        <Link to="/classes/students">
+          <button className={`${styles.classlist__btn} ${styles.allStudents}`}>
+            All students
+          </button>
+        </Link>
       </div>
     </div>
   );

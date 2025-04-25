@@ -2,12 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 
-
 import { RootState, AppDispatch } from '../../store';
 import { fetchStudents } from '../../store/studentsSlice';
 import { host } from '../../config';
 
-import styles from "../../styles/teacherlist.module.scss";
+import styles from '../../styles/teacherlist.module.scss';
 
 interface StudentListProps {
   teacherId?: number;
@@ -16,7 +15,9 @@ interface StudentListProps {
 const StudentList: React.FC<StudentListProps> = ({ teacherId }) => {
   const dispatch: AppDispatch = useDispatch();
   const students = useSelector((state: RootState) => state.students.students);
-  const studentStatus = useSelector((state: RootState) => state.students.status);
+  const studentStatus = useSelector(
+    (state: RootState) => state.students.status,
+  );
   const error = useSelector((state: RootState) => state.students.error);
 
   useEffect(() => {
@@ -29,11 +30,11 @@ const StudentList: React.FC<StudentListProps> = ({ teacherId }) => {
 
   if (studentStatus === 'loading') {
     content = (
-    <div className={styles['load-container']}>
-      <div className={styles.loading}>Loading...</div>
-    </div>
+      <div className={styles['load-container']}>
+        <div className={styles.loading}>Loading...</div>
+      </div>
     );
-    } else if (studentStatus === 'succeeded') {
+  } else if (studentStatus === 'succeeded') {
     content = (
       <table className={styles.teacherlist__table}>
         <thead className={styles.teacherlist__thead}>
@@ -62,25 +63,25 @@ const StudentList: React.FC<StudentListProps> = ({ teacherId }) => {
     content = <div>{error}</div>;
   }
 
-  return (
-    <div>
-      {content}
-    </div>
-  );
+  return <div>{content}</div>;
 };
 
-
 export const TeachersList: React.FC = () => {
-  const [teachers, setTeachers] = useState<{ teacherId: number, teacherName: string }[]>([]);
-  const [selectedTeacherId, setSelectedTeacherId] = useState<number | null>(null);
+  const [teachers, setTeachers] = useState<
+    { teacherId: number; teacherName: string }[]
+  >([]);
+  const [selectedTeacherId, setSelectedTeacherId] = useState<number | null>(
+    null,
+  );
 
   useEffect(() => {
-    axios.get(`${host}/api/teachers`)
-      .then(response => {
+    axios
+      .get(`${host}/api/teachers`)
+      .then((response) => {
         const teachersData = response.data;
         setTeachers(teachersData);
       })
-      .catch(error => {
+      .catch((error) => {
         console.error('Error fetching teachers:', error);
       });
   }, []);
@@ -94,17 +95,20 @@ export const TeachersList: React.FC = () => {
     <div className="teachersList">
       <div className={styles.container}>
         <select onChange={handleSelect} value={selectedTeacherId || ''}>
-          <option disabled value="">Select a teacher</option>
-          {teachers.map(teacher => (
-            <option key={teacher.teacherId} value={teacher.teacherId}>{teacher.teacherName}</option>
-            ))}
+          <option disabled value="">
+            Select a teacher
+          </option>
+          {teachers.map((teacher) => (
+            <option key={teacher.teacherId} value={teacher.teacherId}>
+              {teacher.teacherName}
+            </option>
+          ))}
         </select>
         <h1 className={styles.title}>Teacher's students</h1>
-        {selectedTeacherId !== null && <StudentList teacherId={selectedTeacherId} />}
+        {selectedTeacherId !== null && (
+          <StudentList teacherId={selectedTeacherId} />
+        )}
       </div>
-
-      </div>
+    </div>
   );
 };
-
-

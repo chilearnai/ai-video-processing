@@ -9,8 +9,12 @@ import styles from '../styles/assignment.module.scss';
 
 const AssignmentList: React.FC<{ studentId: number }> = ({ studentId }) => {
   const dispatch: AppDispatch = useDispatch();
-  const assignments = useSelector((state: RootState) => state.assignments.assignments);
-  const assignmentStatus = useSelector((state: RootState) => state.assignments.status);
+  const assignments = useSelector(
+    (state: RootState) => state.assignments.assignments,
+  );
+  const assignmentStatus = useSelector(
+    (state: RootState) => state.assignments.status,
+  );
   const error = useSelector((state: RootState) => state.assignments.error);
 
   useEffect(() => {
